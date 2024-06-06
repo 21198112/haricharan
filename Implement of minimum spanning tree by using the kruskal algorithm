@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100
+typedef struct {
+    int src, dest, weight;
+} Edge;
+typedef struct {
+    int parent;
+    int rank;
+} Subset;
+void swap(Edge* a, Edge* b) {
+    Edge temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int partition(Edge arr[], int low, int high) {
+    int pivot = arr[high].weight;
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].weight < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+void quickSort(Edge arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+int find(Subset subsets[], int i) {
+    if (subsets[i].parent != i) {
+        subsets[i].parent = find(subsets, subsets[i].parent);
+    }
+    return subsets[i].parent;
+}
+void Union(Subset subsets[], int x, int y) {
+    int rootX = find(subsets, x);
+    int rootY = find(subsets, y);
+
+    if (subsets[rootX].rank < subsets[rootY].rank) {
+        subsets[rootX].parent = rootY;
+    } else if (subsets[rootX].rank > subsets[rootY].rank) {
+        subsets[rootY].parent = rootX;
+    } else {
+        subsets[rootY].parent = rootX;
+        subsets[rootX].rank++;
+    }
+}
+void KruskalMST(Edge edges[], int n, int e) {
+    Edge result[MAX];
+    int resultIndex = 0;
+    int edgeIndex = 0;
+    quickSort(edges, 0, e - 1);
+    Subset *subsets = (Subset*) malloc(n * sizeof(Subset));
+    for (int v = 0; v < n; v++) {
+        subsets[v].parent = v;
+        subsets[v].rank = 0;
+    }
+    while (resultIndex < n - 1 && edgeIndex < e) {
+        Edge nextEdge = edges[edgeIndex++];
+        int x = find(subsets, nextEdge.src);
+        int y = find(subsets, nextEdge.dest);
+        if (x != y) {
+            result[resultIndex++] = nextEdge;
+            Union(subsets, x, y);
+        }
+    }
+    printf("Edge \tWeight\n");
+    for (int i = 0; i < resultIndex; i++) {
+        printf("%d - %d \t%d \n", result[i].src, result[i].dest, result[i].weight);
+    }
+    free(subsets);
+}
+int main() {
+    int n, e;
+    Edge edges[MAX];
+    printf("Enter the number of vertices: ");
+    scanf("%d", &n);
+    printf("Enter the number of edges: ");
+    scanf("%d", &e);
+    for (int i = 0; i < e; i++) {
+        printf("Enter edge %d (source, destination, weight): ", i + 1);
+        scanf("%d %d %d", &edges[i].src, &edges[i].dest, &edges[i].weight);
+    }
+    KruskalMST(edges, n, e);
+    return 0;
+}
+
+output: 
+Edge    Weight
+2 - 3   4
+0 - 3   5
+0 - 1   10
