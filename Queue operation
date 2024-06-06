@@ -27,3 +27,9 @@ int dequeue() {
         return value;
     }
 }
+
+output: 
+Dequeued element: 10
+Dequeued element: 20
+Dequeued element: 30
+Queue is empty.
