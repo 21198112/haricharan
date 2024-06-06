@@ -26,3 +26,11 @@ int main() {
     printf("Popped element: %d\n", pop()); // Trying to pop from an empty stack
     return 0;
 }
+
+output: 
+
+Popped element: 30
+Popped element: 20
+Popped element: 10
+Stack Underflow
+Popped element: -1
