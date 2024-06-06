@@ -12,3 +12,5 @@ int main() {
     printf("Factorial of %d = %d", number, result);
     return 0;
 }
+
+Factorial of 5 = 120
