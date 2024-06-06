@@ -11,3 +11,6 @@ int main() {
     }
     return 0;
 }
+
+output: 
+1 2 10 3 4 5
