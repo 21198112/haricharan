@@ -4,62 +4,60 @@
 #define INF INT_MAX
 void dijkstra(int graph[MAX][MAX], int n, int startVertex);
 int main() {
-    int n, e;
-    int graph[MAX][MAX];
-    printf("Enter the number of vertices: ");
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            graph[i][j] = INF;
-        }
-    }
-    printf("Enter the number of edges: ");
-    scanf("%d", &e);
-    for (int i = 0; i < e; i++) {
-        int src, dest, weight;
-        printf("Enter edge %d (source, destination, weight): ", i + 1);
-        scanf("%d %d %d", &src, &dest, &weight);
-        graph[src][dest] = weight;
-        graph[dest][src]=weight;
-    }
-    int startVertex;
-    printf("Enter the starting vertex: ");
-    scanf("%d", &startVertex);
-    dijkstra(graph, n, startVertex);
-    return 0;
+int n, e;
+  int graph[MAX][MAX];
+ printf("Enter the number of vertices: ");
+ scanf("%d", &n);
+ for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+ graph[i][j] = INF;
+}
+ }
+ printf("Enter the number of edges: ");
+scanf("%d", &e);
+for (int i = 0; i < e; i++) {
+int src, dest, weight;
+printf("Enter edge %d (source, destination, weight): ", i + 1);
+scanf("%d %d %d", &src, &dest, &weight);
+ graph[src][dest] = weight;
+ graph[dest][src]=weight;
+ }
+ int startVertex;
+ printf("Enter the starting vertex: ");
+scanf("%d", &startVertex);
+dijkstra(graph, n, startVertex);
+return 0;
 }
 int minDistance(int dist[], int visited[], int n) {
-    int min = INF, minIndex;
-    for (int v = 0; v < n; v++) {
-        if (!visited[v] && dist[v] <= min) {
-            min = dist[v];
-            minIndex = v;
-        }
-    }
-    return minIndex;
+ int min = INF, minIndex;
+ for (int v = 0; v < n; v++) {
+if (!visited[v] && dist[v] <= min) {
+min = dist[v];
+minIndex = v;
+}
+ }
+return minIndex;
 }
 void dijkstra(int graph[MAX][MAX], int n, int startVertex) {
-    int dist[MAX];       
-    int visited[MAX];  
-    // Initialize all distances as INFINITE and visited[] as false
-    for (int i = 0; i < n; i++) {
-        dist[i] = INF;
-        visited[i] = 0;
+int dist[MAX];       
+int visited[MAX];  
+for (int i = 0; i < n; i++) {
+ dist[i] = INF;
+visited[i] = 0;
     }
-    for (int count = 0; count < n - 1; count++) {
-        int u = minDistance(dist, visited, n)
-        visited[u] = 1;
-        for (int v = 0; v < n; v++) {
-            if (!visited[v] && graph[u][v] && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
-                dist[v] = dist[u] + graph[u][v];
-            }
-        }
-    }
-
-    printf("Vertex\tDistance from Source\n");
-    for (int i = 0; i < n; i++) {
-        printf("%d\t%d\n", i, dist[i]);
-    }
+ for (int count = 0; count < n - 1; count++) {
+int u = minDistance(dist, visited, n)
+ visited[u] = 1;
+ for (int v = 0; v < n; v++) {
+if (!visited[v] && graph[u][v] && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
+ dist[v] = dist[u] + graph[u][v];
+ }
+ }
+  }
+printf("Vertex\tDistance from Source\n");
+for (int i = 0; i < n; i++) {
+ printf("%d\t%d\n", i, dist[i]);
+}
 }
 
 output: 
