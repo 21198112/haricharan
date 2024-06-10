@@ -1,0 +1,18 @@
+#include <stdio.h>
+int main() 
+{
+int arr[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+int fifthIndex = 4; // Remember, array indices start from 0
+int arraySize = sizeof(arr) / sizeof(arr[0]);
+if (arraySize >= 5) {
+printf("The 5th iterated element: %d\n", arr[fifthIndex]);
+} 
+else 
+{
+printf("Error: The array does not have enough elements.\n");
+}
+return 0;
+}
+OUTPUT:
+The 5th iterated element: 50
+
