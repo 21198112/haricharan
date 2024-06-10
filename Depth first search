@@ -1,61 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 100
-typedef struct Node {
-    int vertex;
-    struct Node* next;
+typedef struct Node
+{
+int vertex;
+struct Node* next;
 } Node;
 Node* createNode(int v);
 void addEdge(Node* adjList[], int src, int dest);
 void DFS(Node* adjList[], int vertex, int visited[]);
 int main() {
-    int n, e;
-    printf("Enter the number of vertices: ");
-    scanf("%d", &n);
-
-    Node* adjList[MAX];
-    for (int i = 0; i < n; i++) {
-        adjList[i] = NULL;
-    }
-    printf("Enter the number of edges: ");
-    scanf("%d", &e);
-    for (int i = 0; i < e; i++) {
-        int src, dest;
-        printf("Enter edge %d (source and destination): ", i + 1);
-        scanf("%d %d", &src, &dest);
-        addEdge(adjList, src, dest);
-        addEdge(adjList, dest, src); // For undirected graph
-    }
-    int visited[MAX] = {0};
-    printf("Enter the starting vertex: ");
-    int startVertex;
-    scanf("%d", &startVertex);
-    printf("DFS starting from vertex %d:\n", startVertex);
-    DFS(adjList, startVertex, visited);
-    return 0;
+int n, e;
+printf("Enter the number of vertices: ");
+scanf("%d", &n);
+Node* adjList[MAX];
+for (int i = 0; i < n; i++)
+{
+adjList[i] = NULL;
+ }
+ printf("Enter the number of edges: ");
+ scanf("%d", &e);
+ for (int i = 0; i < e; i++) {
+int src, dest;
+ printf("Enter edge %d (source and destination): ", i + 1);
+scanf("%d %d", &src, &dest);
+addEdge(adjList, src, dest);
+addEdge(adjList, dest, src); // For undirected graph
 }
-Node* createNode(int v) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->vertex = v;
-    newNode->next = NULL;
-    return newNode;
+int visited[MAX] = {0};
+ printf("Enter the starting vertex: ");
+int startVertex;
+scanf("%d", &startVertex);
+printf("DFS starting from vertex %d:\n", startVertex);
+DFS(adjList, startVertex, visited);
+ return 0;
+}
+Node* createNode(int v)
+{
+ Node* newNode = (Node*)malloc(sizeof(Node));
+ newNode->vertex = v;
+newNode->next = NULL;
+ return newNode;
 }
 void addEdge(Node* adjList[], int src, int dest) {
-    Node* newNode = createNode(dest);
-    newNode->next = adjList[src];
-    adjList[src] = newNode;
+Node* newNode = createNode(dest);
+newNode->next = adjList[src];
+adjList[src] = newNode;
 }
 void DFS(Node* adjList[], int vertex, int visited[]) {
-    Node* adjListPtr = adjList[vertex];
-    visited[vertex] = 1;
-    printf("%d ", vertex);
-    while (adjListPtr != NULL) {
-        int adjVertex = adjListPtr->vertex;
-        if (!visited[adjVertex]) {
-            DFS(adjList, adjVertex, visited);
-        }
-        adjListPtr = adjListPtr->next;
-    }
+Node* adjListPtr = adjList[vertex];
+visited[vertex] = 1;
+printf("%d ", vertex);
+while (adjListPtr != NULL) {
+int adjVertex = adjListPtr->vertex;
+if (!visited[adjVertex]) {
+DFS(adjList, adjVertex, visited);
+}
+adjListPtr = adjListPtr->next;
+}
 }  
 
 OUTPUT: 
