@@ -1,0 +1,21 @@
+#include <stdio.h>
+int reverseInteger(int num) 
+{
+int reversed = 0;
+while (num != 0) {
+int digit = num % 10;
+reversed = reversed * 10 + digit;
+num /= 10;
+}
+return reversed;
+}
+int main() 
+{
+int num = -12345;
+int reversedNum = reverseInteger(num);
+ printf("Original Number: %d\n", num);
+ printf("Reversed Number: %d\n", reversedNum);
+return 0;
+}
+OUTPUT: 
+REVERSE NUMBER: 54321
