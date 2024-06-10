@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdbool.h>
+#define MAX_SIZE 100
+typedef struct 
+{
+int items[MAX_SIZE];
+int top;
+}
+Stack;
+bool isValidStack(Stack* stack) {
+return stack->top >= 0 && stack->top < MAX_SIZE;
+}
+int main() {
+Stack myStack;
+myStack.top = 0;
+if (isValidStack(&myStack)) {
+printf("Stack is valid!\n");
+}
+else 
+{
+printf("Stack is invalid!\n");
+}
+return 0;
+}
+OUTPUT:
+Stack is valid
