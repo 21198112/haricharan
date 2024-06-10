@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <limits.h>
+void findMostFrequent(int arr[], int n) 
+{
+int maxCount = 0;
+int mostFrequent = arr[0];
+for (int i = 0; i < n; i++) {
+int count = 1;
+for (int j = i + 1; j < n; j++) {
+if (arr[i] == arr[j]) {
+count++;
+}
+if (count > maxCount) {
+maxCount = count;
+mostFrequent = arr[i];
+}
+}
+printf("Most frequently repeated number: %d\n", mostFrequent);
+printf("Frequency: %d\n", maxCount);
+}
+int main() {
+int n;
+printf("Enter the number of elements in the array: ");
+scanf("%d", &n);
+int arr[n];
+printf("Enter the elements of the array:\n");
+for (int i = 0; i < n; i++) {
+scanf("%d", &arr[i]);
+}
+findMostFrequent(arr, n);
+return 0;
+}
+OUTPUT:
+Enter the number of elements in the array: 10
+Enter the elements of the array:
+1 2 3 4 2 2 5 6 2 1
+Most frequently repeated number: 2
+Frequency: 4
