@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+int data;
+struct Node* left;
+struct Node* right;
+};
+struct Node* newNode(int data) {
+struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+node->data = data;
+node->left = node->right = NULL;
+return node;
+}
+struct Node* insert(struct Node* node, int data) {
+if (node == NULL) return newNode(data);
+if (data < node->data) {
+node->left = insert(node->left, data);
+} else
+if (data > node->data) {
+node->right = insert(node->right, data);
+}
+return node;
+}
+void kthSmallestUtil(struct Node* root, int k, int* count, int* result) {
+if (root == NULL || *count >= k) return;
+kthSmallestUtil(root->left, k, count, result);
+ (*count)++;
+if (*count == k) {
+ *result = root->data;
+}return;
+kthSmallestUtil(root->right, k, count, result);
+}
+int kthSmallest(struct Node* root, int k) {
+int count = 0;
+int result = -1;
+kthSmallestUtil(root, k, &count, &result);
+return result;
+}
+void inOrder(struct Node* root) {
+if (root != NULL) {
+inOrder(root->left);
+printf("%d ", root->data);
+inOrder(root->right);
+}
+}
+int main() {
+struct Node* root = NULL;
+root = insert(root, 20);
+root = insert(root, 8);
+root = insert(root, 22);
+root = insert(root, 4);
+root = insert(root, 12);
+root = insert(root, 10);
+root = insert(root, 14);
+int k = 3; 
+int result = kthSmallest(root, k);
+if (result != -1) {
+printf("The %d-th smallest element in the BST is %d.\n", k, result);
+} else 
+{
+printf("There are less than %d elements in the BST.\n", k);
+}
+printf("In-order traversal of the BST: ");
+inOrder(root);
+printf("\n");
+return 0;
+}
+OUTPUT:
+The 3-th smallest element in the BST is 10.
+In-order traversal of the BST: 4 8 10 12 14 20 22 
