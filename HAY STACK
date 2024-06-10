@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+int find_needle_in_haystack(const char *haystack, const char *needle) {
+int haystack_len = strlen(haystack);
+int needle_len = strlen(needle);
+for (int i = 0; i <= haystack_len - needle_len; i++) {
+if (strncmp(&haystack[i], needle, needle_len) == 0) {
+return i;
+}
+}
+return -1;
+}
+int main() {
+const char *haystack = "The quick brown fox jumps over the lazy dog";
+const char *needle = "fox";
+int result = find_needle_in_haystack(haystack, needle);
+if (result != -1) {
+printf("'%s' found in the haystack at index %d.\n", needle, result);
+} 
+else
+{
+printf("'%s' not found in the haystack.\n", needle);
+}
+return 0;
+}
+OUTPUT:
+'fox' found in the haystack at index 16.
