@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include <ctype.h>
-int isValidString(const char *str) {
+int isValidString(const char *str) 
+{
 while (*str) {
 if (!isalpha(*str)) {
- return 0;
+return 0;
 }
- str++;
+str++;
 }
 return 1;
 int main()
 {
- const char *input = "ValidString";
- if (isValidString(input)) 
+const char *input = "ValidString";
+if (isValidString(input)) 
 {
 printf("The string is valid.\n");
-} else
+}
+else
 {
- printf("The string is not valid.\n");
- }
+printf("The string is not valid.\n");
+}
 return 0;
 }
 
